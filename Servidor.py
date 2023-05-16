@@ -2,7 +2,7 @@ import socket
 import threading as threading
 
 
-host='localhost'
+host=socket.gethostbyname(socket.gethostname())
 port=8000
 
 socketserver=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
