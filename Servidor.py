@@ -23,7 +23,7 @@ def broadcast(msj,remitente):
                 client.sendall(msj.encode("utf-8"))
             except:
                 clientes.remove(client)
-                print(f"Desconectando a {client} por un error en la conexión")
+                print(f"Desconectando a {address} por un error en la conexión")
 
 def recibiryenviar(client,address):
     clientes.append(client)
