@@ -33,13 +33,13 @@ def recibiryenviar(client,address):     #FUNCIÓN QUE ESTABLECE CONEXIÓN CON UN
         try:
             msj=client.recv(1024).decode("utf-8")           #SE RECIBEN LOS MENSAJES ENCRIPTADOS DEL CLIENTE (MÁXIMO 1024 BYTES)
             if msj:                                         #SI HAY UN MENSAJE
-                print(f"Mensaje recibido desde {address}: {msj}")
+                print(f"Mensaje recibido desde {address}: {msj}")       #SE IMPRIME EN PANTALLA EL MENSAJE ENCRIPTADO
                 broadcast(msj,client)                       #EL MENSAJE RECIBIDO POR EL SERVIDOR SE ENVÍA A TODOS LOS CLIENTES
         except:
             broadcast(f"{client} se ha desconectado", client)
             print(f"Conexión cerrada desde {address}")
             clientes.remove(client)         #EN CASO DE ERROR SE AVISA DE LA DESCONEXIÓN Y SE ELIMINA AL CLIENTE DE LA LISTA
-            break                           #SE ACABA EL BUCLE DE
+            break                           #SE ACABA EL BUCLE
 
 
 while True:                 #POR SIEMPRE
