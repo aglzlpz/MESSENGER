@@ -36,13 +36,27 @@ def recibiryenviar(client,address):     #FUNCIÓN QUE ESTABLECE CONEXIÓN CON UN
                 print(f"Mensaje recibido desde {address}: {msj}")       #SE IMPRIME EN PANTALLA EL MENSAJE ENCRIPTADO
                 broadcast(msj,client)                       #EL MENSAJE RECIBIDO POR EL SERVIDOR SE ENVÍA A TODOS LOS CLIENTES
         except:
-            broadcast(f"{client} se ha desconectado", client)
+            broadcast(encriptar(f"{address} se ha desconectado",10), client)
             print(f"Conexión cerrada desde {address}")
             clientes.remove(client)         #EN CASO DE ERROR SE AVISA DE LA DESCONEXIÓN Y SE ELIMINA AL CLIENTE DE LA LISTA
             break                           #SE ACABA EL BUCLE
+
+def encriptar(mensaje, desplazamiento):           #ENCRIPTACIÓN CIFRADO CÉSAR (NECESARIO PARA ENVIAR MENSAJE ENTENDIBLE DE FIN DE CONEXIÓN)
+    mensaje_encriptado = ""
+    for caracter in mensaje:
+        if str(caracter).isalpha():
+            ascii_inicial = ord('a') if str(caracter).islower() else ord('A')
+            ascii_encriptado = (ord(str(caracter)) - ascii_inicial + int(desplazamiento)) % 26 + ascii_inicial      #FÓRMULA ENCRIPTADO
+            caracter_encriptado = chr(ascii_encriptado)
+            mensaje_encriptado += caracter_encriptado
+        else:
+            mensaje_encriptado += str(caracter)
+    return mensaje_encriptado
 
 
 while True:                 #POR SIEMPRE
     client,address=socketserver.accept()            #ACEPTAR LAS CONEXIONES QUE LLEGAN AL SOCKET
     hilo = threading.Thread(target=recibiryenviar,args=(client,address))        #SE CREA UN HILO POR CADA CLIENTE QUE EJECUTA LA FUNCION RECIBIRYENVIAR()
     hilo.start()            #SE EJECUTA EL HILO
+
+
