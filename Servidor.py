@@ -5,11 +5,11 @@ import threading as threading
 host=socket.gethostbyname(socket.gethostname())         #IP PRIVADA DEL SERVIDOR
 port=8000                                               #PUERTO DEL SERVIDOR DONDE SE ATIENDEN PETICIONES
 
-socketserver=socket.socket(socket.AF_INET,socket.SOCK_STREAM)       #SE CREA LA CONEXIÓN TCP/IP
-socketserver.bind((host,port))
+socketserver=socket.socket(socket.AF_INET,socket.SOCK_STREAM)       #SE CREA EL SOCKET
+socketserver.bind((host,port))                                      #SE VINCULA EL SOCKET A UNA IP Y UN PUERTO
 socketserver.listen()                  #EL SERVIDOR EMPIEZA A ESCUCHAR DESDE EL PUERTO PARA ATENDER LAS CONEXIONES DEL CLIENTE
     
-print(f"El servidor se encuentra en: {socket.gethostbyname(socket.gethostname())}")      #SE DA IP DEL SERVIDOR
+print(f"El servidor se encuentra en: {host}")      #SE DA IP DEL SERVIDOR
     
 print("Esperando conexión con clientes...")
 

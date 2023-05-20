@@ -1,14 +1,14 @@
 import socket
 import threading
 
-ipclient=input("Escribe la IP del servidor: ")
+ipserver=input("Escribe la IP del servidor: ")
 port=8000                  #PUERTO DEL SERVIDOR QUE ATENDERÁ PETICIONES
 
 
 #SE CREA CONEXIÓN TCP/IP ENTRE CLIENTE Y SERVIDOR
 client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)        
 
-client.connect((ipclient,port))
+client.connect((ipserver,port))
 
 
 nombre=input("Escribe tu nombre de usuario: ")      #SE PREGUNTA A USUARIO SU NOMBRE
